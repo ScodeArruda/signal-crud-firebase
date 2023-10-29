@@ -1,4 +1,4 @@
-# Bem vindo Devs!
+# Bem vindo Dev!
 ## Este é um pequeno sistema de Crud de Produtos com um banco de dados RealTime Firebase, sita-se a vontade para testa-lo.
 
 ## Sou (Sergio Arruda)!
