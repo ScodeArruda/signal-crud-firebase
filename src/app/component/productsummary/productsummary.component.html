@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 offset-lg-12">
+              <h2>Soma dos valores</h2>
+                <table class="table table-bordered">
+
+                    <tbody>
+                        <tr>
+                          <td>Qty total</td>
+                          <td>{{ calculateTotalQty() }}</td>
+                        </tr>
+                        <tr>
+                          <td>Resumo Total</td>
+                          <td>{{ calculateSummaryTotal() | currency: 'BRL' }}</td>
+                        </tr>
+                        <tr>
+                          <td>Resumo do Imposto</td>
+                          <td>{{ calculateSummaryTax() | currency: 'BRL' }}</td>
+                        </tr>
+                        <tr>
+                          <td>Resumo Total + Imposto</td>
+                          <td>{{ calculateSummaryNetTotal() | currency: 'BRL' }}</td>
+                        </tr>
+                      </tbody>
+                      
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

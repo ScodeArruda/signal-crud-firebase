@@ -1,0 +1,75 @@
+<div class="card" *ngIf="!loading">
+    <div class="card-body">
+        <h2>Lista de produtos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{ product.slno }}</td>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price | currency: 'BRL' }}</td>
+                    <td>{{ product.qty }}</td>
+                    <td>{{ product.total | currency: 'BRL' }}</td>
+                    <td>
+                        <button (click)="loadProductData(product)" class="btn btn-primary">
+                            Editar
+                        </button> | 
+                        <button class="btn btn-danger">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div><br>
+
+<!-- Campos de edição -->
+<div class="card">
+    <div class="card-body">
+        <h2>Editar produtos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input [(ngModel)]="selectedProduct.name" name="name" placeholder="Nome">
+                    </td>
+                    <td>
+                        <input [(ngModel)]="selectedProduct.qty" name="qty" placeholder="Quantidade">
+                    </td>
+                    <td>
+                        <input [(ngModel)]="selectedProduct.price" name="price" placeholder="Preço">
+                    </td>
+                    <td>
+                        <button (click)="updateProduct()" class="btn btn-success">
+                            Salvar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="loading-indicator" *ngIf="loading">
+    Carregando...
+</div>

@@ -1,0 +1,32 @@
+<form class="card" [formGroup]="productform" (ngSubmit)="AddProduct()">
+    <div class="card-body">
+        <div class="row">
+            <h2>Adicionar produtos</h2>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Produtos</label>
+                    <!-- Substitua o select por um campo de entrada de texto -->
+                    <input class="form-control" formControlName="name">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label>Qty</label>
+                    <input class="form-control" formControlName="qty" (input)="formatInput($event, 'qty')">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label>Price</label>
+                    <input class="form-control" formControlName="price" (input)="formatInput($event, 'price')">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <br>
+                    <button type="submit" class="btn btn-primary" [disabled]="!isButtonEnabled">Add Produto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
