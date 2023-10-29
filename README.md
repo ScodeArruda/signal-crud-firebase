@@ -1,8 +1,8 @@
-# Welcome!
+# Bem vindo Devs!
 
  
 
-## I'm (Sergio Arruda)!
+## Sou (Sergio Arruda)!
 
  
 
