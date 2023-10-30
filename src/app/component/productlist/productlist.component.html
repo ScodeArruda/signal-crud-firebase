@@ -30,6 +30,7 @@
         </table>
     </div>
 </div><br>
+  
 
 <!-- Campos de edição -->
 <div class="card" *ngIf="editingEnabled">
@@ -53,7 +54,7 @@
                         <input [(ngModel)]="selectedProduct.qty" name="qty" placeholder="Quantidade">
                     </td>
                     <td>
-                        <input [(ngModel)]="selectedProduct.unformattedPrice" name="price" placeholder="Preço">
+                        <input [(ngModel)]="selectedProduct.price" name="price" placeholder="Preço">
                     </td>
                     <td>
                         <button (click)="updateProduct()" class="btn btn-success">
