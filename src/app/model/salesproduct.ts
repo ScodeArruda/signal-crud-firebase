@@ -1,6 +1,6 @@
 export interface SalesProduct {
+    key: string,
     slno: number,
-    code: string,
     name: string,
     price: number,
     qty: number,

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup } from '@angular/forms';
-import { take } from 'rxjs';
+import { map } from 'rxjs';
+import { SalesProduct } from '../model/salesproduct';
 
 @Injectable({
   providedIn: 'root'
@@ -42,38 +43,36 @@ export class FiredbService {
     });
   }
 
-  // getProducts(): Observable<any> {
-  //   return this.db.list('products/').valueChanges();
-  // }
-
-  updateProduct(code: string, updatedProduct: any) {
+  updateProduct(key: string, updatedProduct: any) {
     return new Promise<void>((resolve, reject) => {
-      this.db.list('products', (ref) => ref.orderByChild('code').equalTo(code))
-        .snapshotChanges()
-        .pipe(take(1))
-        .subscribe((snapshots) => {
-          if (snapshots && snapshots.length > 0) {
-            const productKey = snapshots[0].payload.key;
-            this.db.object(`products/${productKey}`).update(updatedProduct)
-              .then(() => {
-                console.log('Produto atualizado com sucesso.');
-                resolve();
-              })
-              .catch((error) => {
-                console.error('Erro ao atualizar o produto:', error);
-                reject(error);
-              });
-          } else {
-            console.error('Produto não encontrado para atualização.');
-            reject('Produto não encontrado');
-          }
+      this.db.object(`products/${key}`).update(updatedProduct)
+        .then(() => {
+          // console.log('Produto atualizado com sucesso.');
+          resolve();
+        })
+        .catch((error) => {
+          console.error('Erro ao atualizar o produto:', error);
+          reject(error);
         });
     });
-  }  
+  }
 
-  // Método para obter a lista de produtos a partir do Firebase Realtime Database
+  // Método para obter a lista de produtos a partir do Firebase Realtime Database com as chaves
   getProducts() {
-    return this.db.list('products').valueChanges();
+    return this.db.list('products').snapshotChanges().pipe(
+      map((snapshots) => {
+        return snapshots.map((snapshot) => {
+          const key = snapshot.payload.key;
+          const data = snapshot.payload.val() as SalesProduct;
+          return { key, ...data };
+        });
+      })
+    );
+  }
+
+  // Método para excluir um produto com base em sua chave (key)
+  deleteProduct(productKey: string) {
+    return this.db.object(`products/${productKey}`).remove();
   }
 
 }

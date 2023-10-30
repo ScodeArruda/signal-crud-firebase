@@ -5,7 +5,7 @@
             <thead>
                 <tr>
                     <th>Sl.No</th>
-                    <th>Código</th>
+                    <th>Key</th>
                     <th>Nome</th>
                     <th>Valor</th>
                     <th>Qty</th>
@@ -14,9 +14,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products">
+                <tr *ngFor="let product of products; let i = index">
                     <td>{{ product.slno }}</td>
-                    <td>{{ product.code }}</td>
+                    <td>{{ product.key }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.price | currency: 'BRL' }}</td>
                     <td>{{ product.qty }}</td>
@@ -25,9 +25,7 @@
                         <button (click)="loadProductData(product)" class="btn btn-primary">
                             Editar
                         </button> | 
-                        <button class="btn btn-danger">
-                            Excluir
-                        </button>
+                        <button (click)="onDeleteProduct(i)" class="btn btn-danger">Excluir</button>
                     </td>
                 </tr>
             </tbody>

@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 import { ProductAddComponent } from './component/productadd/productadd.component';
@@ -32,6 +33,7 @@ registerLocaleData(ptBr);
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -40,7 +42,7 @@ registerLocaleData(ptBr);
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

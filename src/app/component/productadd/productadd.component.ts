@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { FiredbService } from '../../service/firedb.service';
 
 @Component({
@@ -19,7 +20,6 @@ export class ProductAddComponent {
 
   productform = this.builder.group({
     slno: this.builder.control(0),
-    code: this.builder.control(''),
     name: this.builder.control(''),
     qty: this.builder.control(0),
     price: this.builder.control(0),
@@ -58,7 +58,6 @@ export class ProductAddComponent {
         // Crie um novo FormGroup com os valores do SalesProduct
         const _objFormGroup: FormGroup = this.builder.group({
           slno: this.builder.control(0),
-          code: this.builder.control(''), // O código do produto será gerado automaticamente
           name: this.builder.control(this.productform.value.name),
           price: this.builder.control(_price),
           qty: this.builder.control(_qty),
@@ -68,16 +67,20 @@ export class ProductAddComponent {
         // Recupere o número total de produtos no banco de dados
         this.firedbService.getTotalProductCount().then((count) => {
           const _slno = count + 1; // Incrementa o valor sequencial de slno
-          const _code = `P${_slno}`; // Define o código com base no valor de slno
           _objFormGroup.controls.slno.setValue(_slno);
-          _objFormGroup.controls.code.setValue(_code);
   
           this.firedbService.AddProduct(_objFormGroup)
             .then(() => {
+              Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Produto cadastrado com sucesso.',
+                showConfirmButton: false,
+                timer: 2500
+              })
               // Resultado da adição bem-sucedida, você pode processá-lo se necessário
               this.productform.setValue({
                 slno: 0,
-                code: '',
                 name: '',
                 qty: 0,
                 price: 0,
