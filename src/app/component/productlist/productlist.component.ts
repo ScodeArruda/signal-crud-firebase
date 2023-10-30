@@ -25,9 +25,11 @@ export class ProductlistComponent {
     qty: 0,
     price: 0,
     total: 0,
+    unformattedPrice: 0,
   };
   closeResult = '';
   loading = false;
+  editingEnabled = false;
 
   constructor(
     private fireService: FiredbService,
@@ -42,11 +44,15 @@ export class ProductlistComponent {
   }
 
   loadProductData(product: any): void {
-    // Carregue os dados do produto selecionado com base no campo "code"
+    // Carregue os dados do produto selecionado com base na chave "key"
     const selectedProduct = this.products.find((p) => p.key === product.key);
-
+    this.editingEnabled = true;
+  
     if (selectedProduct) {
-      this.selectedProduct = { ...selectedProduct };
+      this.selectedProduct = {
+        ...selectedProduct,
+        unformattedPrice: selectedProduct.price // Inicialize unformattedPrice com o valor de price
+      };
     }
   }
 

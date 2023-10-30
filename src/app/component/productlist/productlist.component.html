@@ -4,7 +4,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Sl.No</th>
                     <th>Key</th>
                     <th>Nome</th>
                     <th>Valor</th>
@@ -15,7 +14,6 @@
             </thead>
             <tbody>
                 <tr *ngFor="let product of products; let i = index">
-                    <td>{{ product.slno }}</td>
                     <td>{{ product.key }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.price | currency: 'BRL' }}</td>
@@ -24,7 +22,7 @@
                     <td>
                         <button (click)="loadProductData(product)" class="btn btn-primary">
                             Editar
-                        </button> | 
+                        </button> |
                         <button (click)="onDeleteProduct(i)" class="btn btn-danger">Excluir</button>
                     </td>
                 </tr>
@@ -34,7 +32,7 @@
 </div><br>
 
 <!-- Campos de edição -->
-<div class="card">
+<div class="card" *ngIf="editingEnabled">
     <div class="card-body">
         <h2>Editar produtos</h2>
         <table class="table table-bordered">
@@ -55,7 +53,7 @@
                         <input [(ngModel)]="selectedProduct.qty" name="qty" placeholder="Quantidade">
                     </td>
                     <td>
-                        <input [(ngModel)]="selectedProduct.price" name="price" placeholder="Preço">
+                        <input [(ngModel)]="selectedProduct.unformattedPrice" name="price" placeholder="Preço">
                     </td>
                     <td>
                         <button (click)="updateProduct()" class="btn btn-success">
